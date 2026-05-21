@@ -11,7 +11,7 @@
       <q-list>
         <q-item class="bg-primary text-white" style="min-height: 80px">
           <q-item-section avatar>
-            <img src="/icons/icon-128x128.png" width="48" height="48" style="border-radius: 12px" />
+            <img :src="appIcon" width="48" height="48" style="border-radius: 12px" />
           </q-item-section>
           <q-item-section>
             <q-item-label class="text-h6">BMI &amp;</q-item-label>
@@ -59,6 +59,7 @@
 import { ref, onMounted } from 'vue'
 import { useWeightStore } from 'src/stores/weightStore'
 import EntryDialog from 'src/components/EntryDialog.vue'
+import appIcon from 'src/assets/app-icon.png'
 
 const store = useWeightStore()
 const leftDrawerOpen = ref(false)

@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-none">
     <div class="row justify-end q-px-md q-pt-md q-pb-sm">
-      <img src="/icons/icon-128x128.png" width="52" height="52" style="border-radius: 13px" />
+      <img :src="appIcon" width="52" height="52" style="border-radius: 13px" />
     </div>
     <q-list separator>
       <!-- Erinnerung -->
@@ -140,6 +140,7 @@
 <script setup>
 import { reactive, ref, onMounted } from "vue";
 import { useWeightStore } from "src/stores/weightStore";
+import appIcon from 'src/assets/app-icon.png';
 import { exportToCSV, importFromCSV } from "src/services/db";
 import { useQuasar } from "quasar";
 
