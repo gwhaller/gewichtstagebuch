@@ -1,0 +1,14 @@
+# Persönliche Daten
+sources/
+
+# Node
+node_modules/
+
+# Quasar Build
+app/dist/
+app/.quasar/
+app/quasar.config.*.temporary.compiled*
+
+# OS
+.DS_Store
+.thumbs.db
