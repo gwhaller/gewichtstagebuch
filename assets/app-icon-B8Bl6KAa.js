@@ -1,0 +1,1 @@
+var e=`/gewichtstagebuch/assets/app-icon-CBqvkiOU.png`;export{e as t};
