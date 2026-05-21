@@ -1,5 +1,8 @@
 <template>
   <q-page class="q-pa-none">
+    <div class="row justify-end q-px-md q-pt-md q-pb-sm">
+      <img src="/icons/icon-128x128.png" width="52" height="52" style="border-radius: 13px" />
+    </div>
     <q-list separator>
       <!-- Erinnerung -->
       <q-item>

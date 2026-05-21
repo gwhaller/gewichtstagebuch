@@ -11,7 +11,7 @@
       <q-list>
         <q-item class="bg-primary text-white" style="min-height: 80px">
           <q-item-section avatar>
-            <q-icon name="monitor_weight" size="48px" />
+            <img src="/icons/icon-128x128.png" width="48" height="48" style="border-radius: 12px" />
           </q-item-section>
           <q-item-section>
             <q-item-label class="text-h6">BMI &amp;</q-item-label>
