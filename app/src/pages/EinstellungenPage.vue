@@ -58,15 +58,13 @@
             placeholder="http://..."
             class="q-mt-xs"
           />
-          <q-chip
+          <div
             v-if="store.syncStatus"
-            :icon="syncIcon"
-            :color="syncColor"
-            text-color="white"
-            dense
-            class="q-mt-sm q-ml-none"
-            >{{ syncLabel }}</q-chip
+            class="row items-center q-mt-sm q-gutter-xs"
           >
+            <q-icon :name="syncIcon" :color="syncColor" size="18px" />
+            <span :class="`text-${syncColor} text-caption`">{{ syncLabel }}</span>
+          </div>
         </q-item-section>
       </q-item>
 

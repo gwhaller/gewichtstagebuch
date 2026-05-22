@@ -102,11 +102,24 @@ export function startSync(couchdbUrl, onStatus) {
   if (!couchdbUrl) return;
   if (syncHandler) syncHandler.cancel();
   if (onStatus) onStatus("connecting", null);
+
+  // Timeout: wenn nach 12s kein Event → SSL-Zertifikat nicht vertrauenswürdig oder Server nicht erreichbar
+  let timeoutId = setTimeout(() => {
+    onStatus?.("error", new Error("Keine Antwort – Server nicht erreichbar oder SSL-Zertifikat nicht vertrauenswürdig"));
+  }, 12000);
+
+  const clearT = () => clearTimeout(timeoutId);
+
   syncHandler = db
     .sync(couchdbUrl, { live: true, retry: true })
-    .on("active", () => onStatus?.("active", null))
-    .on("paused", () => onStatus?.("paused", null))
+    .on("active", () => { clearT(); onStatus?.("active", null); })
+    .on("paused", (err) => {
+      clearT();
+      if (err) onStatus?.("error", err);
+      else onStatus?.("paused", null);
+    })
     .on("error", (err) => {
+      clearT();
       console.warn("CouchDB Sync-Fehler:", err);
       onStatus?.("error", err);
     });
