@@ -1,0 +1,1 @@
+import{t as e}from"./pinia-BBxkg_wK.js";var t=({app:t})=>{t.use(e())};export{t as default};
