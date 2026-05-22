@@ -262,8 +262,14 @@ const chartOptions = computed(() => {
     plugins: {
       legend: { display: false },
       tooltip: {
+        displayColors: false,
+        filter: (item) => item.dataset.label !== 'Zielgewicht',
         callbacks: {
           label: (ctx) => ctx.parsed.y.toFixed(1).replace(".", ",") + " kg",
+          afterBody: (items) => {
+            const note = entries[items[0]?.dataIndex]?.note;
+            return note ? `Taille: ${note} cm` : [];
+          },
         },
       },
     },
