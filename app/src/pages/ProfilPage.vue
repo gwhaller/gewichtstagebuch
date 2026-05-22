@@ -3,7 +3,7 @@
     <div class="row justify-end q-px-md q-pt-md q-pb-sm">
       <img :src="appIcon" width="52" height="52" style="border-radius: 13px" />
     </div>
-    <div class="q-px-md">
+    <div class="q-px-md q-pt-md">
     <div class="row items-center q-mb-lg">
       <div class="col-5 text-weight-medium">Geschlecht</div>
       <div class="col-7">
@@ -50,25 +50,7 @@
       <div class="col-2 q-pl-sm text-grey">kg</div>
     </div>
 
-    <div class="row items-center q-mb-lg">
-      <div class="col-5 text-weight-medium">Ich möchte</div>
-      <div class="col-7">
-        <q-btn-toggle
-          v-model="form.goal"
-          :options="[
-            { label: 'abnehmen', value: 'lose' },
-            { label: 'zunehmen', value: 'gain' },
-          ]"
-          unelevated
-          color="grey-3"
-          text-color="black"
-          toggle-color="grey-5"
-          dense
-        />
-      </div>
-    </div>
-
-    <q-btn color="primary" label="Speichern" @click="save" />
+    <q-btn color="primary" label="Speichern" @click="save" class="q-mt-lg" />
     </div>
   </q-page>
 </template>
