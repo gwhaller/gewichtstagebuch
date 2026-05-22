@@ -63,7 +63,7 @@ export const useWeightStore = defineStore("weight", {
         this.profile = await getProfile();
         this.settings = await getSettings();
         if (this.settings.couchdbUrl) {
-          this.syncStatus = 'connecting';
+          this.syncStatus = "connecting";
           startSync(this.settings.couchdbUrl, (status, err) => {
             this.syncStatus = status;
             this.syncError = err;
@@ -97,7 +97,7 @@ export const useWeightStore = defineStore("weight", {
       await saveSettings(settings);
       this.settings = { ...settings };
       if (settings.couchdbUrl) {
-        this.syncStatus = 'connecting';
+        this.syncStatus = "connecting";
         startSync(settings.couchdbUrl, (status, err) => {
           this.syncStatus = status;
           this.syncError = err;

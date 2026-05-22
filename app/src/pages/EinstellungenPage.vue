@@ -65,7 +65,8 @@
             text-color="white"
             dense
             class="q-mt-sm q-ml-none"
-          >{{ syncLabel }}</q-chip>
+            >{{ syncLabel }}</q-chip
+          >
         </q-item-section>
       </q-item>
 
@@ -146,9 +147,33 @@ onMounted(() => {
   if (store.settings) Object.assign(form, store.settings);
 });
 
-const syncIcon = computed(() => ({ connecting: 'sync', active: 'sync', paused: 'check_circle', error: 'sync_problem' }[store.syncStatus] ?? 'sync_disabled'))
-const syncColor = computed(() => ({ connecting: 'grey-6', active: 'blue', paused: 'positive', error: 'negative' }[store.syncStatus] ?? 'grey-6'))
-const syncLabel = computed(() => ({ connecting: 'Verbinde...', active: 'Synchronisiert...', paused: 'Verbunden', error: store.syncError?.message || 'Verbindungsfehler' }[store.syncStatus] ?? ''))
+const syncIcon = computed(
+  () =>
+    ({
+      connecting: "sync",
+      active: "sync",
+      paused: "check_circle",
+      error: "sync_problem",
+    })[store.syncStatus] ?? "sync_disabled",
+);
+const syncColor = computed(
+  () =>
+    ({
+      connecting: "grey-6",
+      active: "blue",
+      paused: "positive",
+      error: "negative",
+    })[store.syncStatus] ?? "grey-6",
+);
+const syncLabel = computed(
+  () =>
+    ({
+      connecting: "Verbinde...",
+      active: "Synchronisiert...",
+      paused: "Verbunden",
+      error: store.syncError?.message || "Verbindungsfehler",
+    })[store.syncStatus] ?? "",
+);
 
 async function save() {
   await store.saveSettings({ ...form });
