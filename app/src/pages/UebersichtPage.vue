@@ -41,8 +41,8 @@
             v-for="f in filters"
             :key="f.key"
             :label="f.label"
-            color="grey-4"
-            text-color="black"
+            :color="activeFilter === f.key ? 'grey-6' : 'grey-4'"
+            :text-color="activeFilter === f.key ? 'white' : 'black'"
             :class="activeFilter === f.key ? 'text-weight-bold' : ''"
             dense
             unelevated
@@ -94,7 +94,7 @@
         <q-list separator>
           <q-item-label header class="row text-weight-bold">
             <span style="flex: 1.2">Datum</span>
-            <span style="flex: 1">Notiz</span>
+            <span style="flex: 1">Taille</span>
             <span style="flex: 1; text-align: right">Gewicht</span>
             <span style="flex: 1; text-align: right">Diff</span>
             <span style="flex: 0.8; text-align: right">BMI</span>
@@ -205,10 +205,11 @@ const chartData = computed(() => {
     {
       label: "Gewicht",
       data: entries.map((e) => e.weight),
-      borderColor: "#1976D2",
+      borderColor: "#1145a0",
+      borderWidth: 2,
       backgroundColor: "white",
       pointBackgroundColor: pointBgColor,
-      pointBorderColor: "#1976D2",
+      pointBorderColor: "#1145a0",
       pointBorderWidth: pointBorderW,
       pointRadius,
       pointHoverRadius: pointRadius + 2,
@@ -220,7 +221,7 @@ const chartData = computed(() => {
     datasets.push({
       label: "Zielgewicht",
       data: entries.map(() => store.profile.targetWeight),
-      borderColor: "#1976D2",
+      borderColor: "#1145a0",
       borderDash: [8, 5],
       pointRadius: 0,
       tension: 0,
