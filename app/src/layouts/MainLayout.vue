@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useWeightStore } from 'src/stores/weightStore'
 import EntryDialog from 'src/components/EntryDialog.vue'
 import appIcon from 'src/assets/app-icon.png'
@@ -69,5 +69,12 @@ function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 
-onMounted(() => store.loadAll())
+onMounted(() => {
+  store.loadAll()
+  const onVisible = () => {
+    if (document.visibilityState === 'visible') store.loadEntries()
+  }
+  document.addEventListener('visibilitychange', onVisible)
+  onUnmounted(() => document.removeEventListener('visibilitychange', onVisible))
+})
 </script>

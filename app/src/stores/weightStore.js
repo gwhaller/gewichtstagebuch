@@ -8,7 +8,6 @@ import {
   getSettings,
   saveSettings,
   startSync,
-  subscribeToChanges,
 } from "src/services/db";
 
 export const useWeightStore = defineStore("weight", {
@@ -64,9 +63,6 @@ export const useWeightStore = defineStore("weight", {
         if (this.settings.couchdbUrl) {
           startSync(this.settings.couchdbUrl);
         }
-        subscribeToChanges(() => {
-          this.loadEntries();
-        });
       } finally {
         this.loading = false;
       }
