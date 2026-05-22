@@ -16,6 +16,8 @@ export const useWeightStore = defineStore("weight", {
     profile: null,
     settings: null,
     loading: false,
+    syncStatus: null,
+    syncError: null,
   }),
 
   getters: {
@@ -61,7 +63,11 @@ export const useWeightStore = defineStore("weight", {
         this.profile = await getProfile();
         this.settings = await getSettings();
         if (this.settings.couchdbUrl) {
-          startSync(this.settings.couchdbUrl);
+          this.syncStatus = 'connecting';
+          startSync(this.settings.couchdbUrl, (status, err) => {
+            this.syncStatus = status;
+            this.syncError = err;
+          });
         }
       } finally {
         this.loading = false;
@@ -87,10 +93,19 @@ export const useWeightStore = defineStore("weight", {
       this.profile = { ...profile };
     },
 
-    async saveSettings(settings, onSyncError) {
+    async saveSettings(settings) {
       await saveSettings(settings);
       this.settings = { ...settings };
-      if (settings.couchdbUrl) startSync(settings.couchdbUrl, onSyncError);
+      if (settings.couchdbUrl) {
+        this.syncStatus = 'connecting';
+        startSync(settings.couchdbUrl, (status, err) => {
+          this.syncStatus = status;
+          this.syncError = err;
+        });
+      } else {
+        this.syncStatus = null;
+        this.syncError = null;
+      }
     },
   },
 });

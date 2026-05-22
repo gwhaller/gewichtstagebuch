@@ -98,14 +98,17 @@ export async function exportToCSV() {
 
 let syncHandler = null;
 
-export function startSync(couchdbUrl, onError) {
+export function startSync(couchdbUrl, onStatus) {
   if (!couchdbUrl) return;
   if (syncHandler) syncHandler.cancel();
+  if (onStatus) onStatus('connecting', null);
   syncHandler = db
     .sync(couchdbUrl, { live: true, retry: true })
+    .on('active', () => onStatus?.('active', null))
+    .on('paused', () => onStatus?.('paused', null))
     .on("error", (err) => {
       console.warn("CouchDB Sync-Fehler:", err);
-      if (onError) onError(err);
+      onStatus?.('error', err);
     });
   return syncHandler;
 }

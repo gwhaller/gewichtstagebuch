@@ -58,6 +58,14 @@
             placeholder="http://..."
             class="q-mt-xs"
           />
+          <q-chip
+            v-if="store.syncStatus"
+            :icon="syncIcon"
+            :color="syncColor"
+            text-color="white"
+            dense
+            class="q-mt-sm q-ml-none"
+          >{{ syncLabel }}</q-chip>
         </q-item-section>
       </q-item>
 
@@ -116,7 +124,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, computed, onMounted } from "vue";
 import { useWeightStore } from "src/stores/weightStore";
 import appIcon from "src/assets/app-icon.png";
 import { exportToCSV, importFromCSV } from "src/services/db";
@@ -138,15 +146,12 @@ onMounted(() => {
   if (store.settings) Object.assign(form, store.settings);
 });
 
+const syncIcon = computed(() => ({ connecting: 'sync', active: 'sync', paused: 'check_circle', error: 'sync_problem' }[store.syncStatus] ?? 'sync_disabled'))
+const syncColor = computed(() => ({ connecting: 'grey-6', active: 'blue', paused: 'positive', error: 'negative' }[store.syncStatus] ?? 'grey-6'))
+const syncLabel = computed(() => ({ connecting: 'Verbinde...', active: 'Synchronisiert...', paused: 'Verbunden', error: store.syncError?.message || 'Verbindungsfehler' }[store.syncStatus] ?? ''))
+
 async function save() {
-  await store.saveSettings({ ...form }, (err) => {
-    $q.notify({
-      message: `CouchDB-Sync fehlgeschlagen: ${err?.message || err}`,
-      color: "negative",
-      icon: "sync_problem",
-      timeout: 5000,
-    });
-  });
+  await store.saveSettings({ ...form });
   $q.notify({
     message: "Einstellungen gespeichert",
     color: "positive",
