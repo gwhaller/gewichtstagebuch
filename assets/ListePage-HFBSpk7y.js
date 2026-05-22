@@ -1,1 +1,0 @@
-import{Ct as e,Ht as t,It as n,W as r,yt as i,zt as a}from"./index-BGbP2TV5.js";import{t as o}from"./QPage-BH-9JAwg.js";var s={};function c(r,s){let c=a(`q-redirect`);return n(),i(o,{class:`q-pa-md`},{default:t(()=>[e(c,{to:`/uebersicht`})]),_:1})}var l=r(s,[[`render`,c]]);export{l as default};
