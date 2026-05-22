@@ -3,7 +3,7 @@
     <q-header elevated style="background: #1976D2">
       <q-toolbar>
         <q-btn flat dense round icon="menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title>Gewichtstagebuch</q-toolbar-title>
+        <q-toolbar-title>{{ pageTitle }}</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -47,7 +47,7 @@
       <router-view />
     </q-page-container>
 
-    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+    <q-page-sticky v-if="route.path === '/uebersicht'" position="bottom-right" :offset="[18, 18]">
       <q-btn fab icon="add" color="green" @click="entryDialog = true" />
     </q-page-sticky>
 
@@ -56,14 +56,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useWeightStore } from 'src/stores/weightStore'
 import EntryDialog from 'src/components/EntryDialog.vue'
 import appIcon from 'src/assets/app-icon.png'
 
 const store = useWeightStore()
+const route = useRoute()
 const leftDrawerOpen = ref(false)
 const entryDialog = ref(false)
+
+const pageTitles = {
+  '/uebersicht': 'Gewichtstagebuch',
+  '/bmi-rechner': 'BMI-Rechner',
+  '/profil': 'Profil',
+  '/einstellungen': 'Einstellungen',
+}
+const pageTitle = computed(() => pageTitles[route.path] ?? 'Gewichtstagebuch')
 
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
