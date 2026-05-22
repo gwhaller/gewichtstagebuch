@@ -92,12 +92,12 @@
       <!-- LISTE -->
       <q-tab-panel name="liste" class="q-pa-none">
         <q-item-label header class="row text-weight-bold">
-            <span style="flex: 1.2">Datum</span>
-            <span style="flex: 1">Taille</span>
-            <span style="flex: 1; text-align: right">Gewicht</span>
-            <span style="flex: 1; text-align: right">Diff</span>
-            <span style="flex: 0.8; text-align: right">BMI</span>
-          </q-item-label>
+          <span style="flex: 1.2">Datum</span>
+          <span style="flex: 1">Taille</span>
+          <span style="flex: 1; text-align: right">Gewicht</span>
+          <span style="flex: 1; text-align: right">Diff</span>
+          <span style="flex: 0.8; text-align: right">BMI</span>
+        </q-item-label>
         <q-virtual-scroll
           :items="listEntries"
           separator
@@ -105,21 +105,24 @@
           style="height: calc(100vh - 170px)"
           v-slot="{ item: entry, index: i }"
         >
-          <q-item
-            :key="entry.date"
-            clickable
-            @click="startEdit(entry)"
-          >
+          <q-item :key="entry.date" clickable @click="startEdit(entry)">
             <q-item-section>
               <div class="row items-center">
                 <span style="flex: 1.2">{{ formatDate(entry.date) }}</span>
-                <span style="flex: 1; font-size: 12px; color: #888">{{ entry.note }}</span>
-                <span style="flex: 1; text-align: right">{{ entry.weight }} kg</span>
+                <span style="flex: 1; font-size: 12px; color: #888">{{
+                  entry.note
+                }}</span>
+                <span style="flex: 1; text-align: right"
+                  >{{ entry.weight }} kg</span
+                >
                 <span
                   :style="diffStyle(entry, i)"
                   style="flex: 1; text-align: right; font-weight: 500"
-                >{{ diffStr(entry, i) }}</span>
-                <span style="flex: 0.8; text-align: right">{{ entryBmi(entry) }}</span>
+                  >{{ diffStr(entry, i) }}</span
+                >
+                <span style="flex: 0.8; text-align: right">{{
+                  entryBmi(entry)
+                }}</span>
               </div>
             </q-item-section>
           </q-item>
@@ -253,7 +256,7 @@ const chartOptions = computed(() => {
     maintainAspectRatio: false,
     animation: false,
     interaction: {
-      mode: 'index',
+      mode: "index",
       intersect: false,
     },
     layout: {
@@ -263,7 +266,7 @@ const chartOptions = computed(() => {
       legend: { display: false },
       tooltip: {
         displayColors: false,
-        filter: (item) => item.dataset.label !== 'Zielgewicht',
+        filter: (item) => item.dataset.label !== "Zielgewicht",
         callbacks: {
           label: (ctx) => ctx.parsed.y.toFixed(1).replace(".", ",") + " kg",
           afterBody: (items) => {

@@ -112,14 +112,13 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-
   </q-page>
 </template>
 
 <script setup>
 import { reactive, ref, onMounted } from "vue";
 import { useWeightStore } from "src/stores/weightStore";
-import appIcon from 'src/assets/app-icon.png';
+import appIcon from "src/assets/app-icon.png";
 import { exportToCSV, importFromCSV } from "src/services/db";
 import { useQuasar } from "quasar";
 

@@ -23,7 +23,14 @@
         </div>
         <div>
           <div class="text-subtitle2 q-mb-xs">Taille</div>
-          <q-input v-model.number="form.note" dense outlined type="number" step="1" suffix="cm" />
+          <q-input
+            v-model.number="form.note"
+            dense
+            outlined
+            type="number"
+            step="1"
+            suffix="cm"
+          />
         </div>
       </q-card-section>
 
