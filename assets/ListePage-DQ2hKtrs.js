@@ -1,1 +1,0 @@
-import{B as e,Lt as t,Pt as n,ht as r,jt as i,vt as a}from"./index-IOkiXM5v.js";import{t as o}from"./QPage-BGyZZW6Z.js";var s={};function c(e,s){let c=n(`q-redirect`);return i(),r(o,{class:`q-pa-md`},{default:t(()=>[a(c,{to:`/uebersicht`})]),_:1})}var l=e(s,[[`render`,c]]);export{l as default};
