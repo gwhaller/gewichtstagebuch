@@ -76,17 +76,6 @@
           >
         </q-item-section>
       </q-item>
-
-      <!-- Daten zurücksetzen -->
-      <q-item clickable v-ripple @click="confirmReset = true">
-        <q-item-section avatar
-          ><q-icon name="delete_forever" color="grey-7"
-        /></q-item-section>
-        <q-item-section>
-          <q-item-label>Daten zurücksetzen</q-item-label>
-          <q-item-label caption>Gewichtseinträge löschen</q-item-label>
-        </q-item-section>
-      </q-item>
     </q-list>
 
     <div class="q-pa-md">
@@ -147,7 +136,6 @@ import { useQuasar } from "quasar";
 const store = useWeightStore();
 const $q = useQuasar();
 const showBackup = ref(false);
-const confirmReset = ref(false);
 const fileInput = ref(null);
 
 const form = reactive({
@@ -200,13 +188,5 @@ async function importCsv(event) {
     color: "positive",
     icon: "check",
   });
-}
-
-async function resetData() {
-  for (const entry of store.entries) {
-    await store.deleteEntry(entry.date);
-  }
-  confirmReset.value = false;
-  $q.notify({ message: "Daten gelöscht", color: "warning", icon: "delete" });
 }
 </script>

@@ -98,6 +98,10 @@ export async function exportToCSV() {
 
 let syncHandler = null;
 
+export function subscribeToChanges(callback) {
+  return db.changes({ live: true, since: 'now' }).on('change', callback);
+}
+
 export function startSync(couchdbUrl, onError) {
   if (!couchdbUrl) return;
   if (syncHandler) syncHandler.cancel();
