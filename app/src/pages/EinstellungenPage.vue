@@ -113,16 +113,6 @@
       </q-card>
     </q-dialog>
 
-    <!-- Reset Bestätigung -->
-    <q-dialog v-model="confirmReset">
-      <q-card>
-        <q-card-section>Alle Gewichtseinträge wirklich löschen?</q-card-section>
-        <q-card-actions align="right">
-          <q-btn flat label="Abbrechen" v-close-popup />
-          <q-btn flat label="Löschen" color="negative" @click="resetData" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
   </q-page>
 </template>
 
