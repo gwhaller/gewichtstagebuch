@@ -3,7 +3,7 @@
   "short_name": "Gewicht",
   "description": "Persönliches Gewichtstagebuch mit CouchDB-Sync",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#1976D2",
   "start_url": "/gewichtstagebuch/",
