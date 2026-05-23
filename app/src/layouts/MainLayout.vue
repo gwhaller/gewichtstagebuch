@@ -87,6 +87,22 @@
     </q-page-sticky>
 
     <EntryDialog v-model="entryDialog" />
+
+    <q-banner
+      v-if="updateAvailable"
+      dense
+      class="bg-blue text-white"
+      style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999"
+    >
+      <template #avatar>
+        <q-icon name="system_update" />
+      </template>
+      Neue Version verfügbar
+      <template #action>
+        <q-btn flat dense label="Aktualisieren" @click="reloadApp" />
+        <q-btn flat dense label="Später" @click="updateAvailable = false" />
+      </template>
+    </q-banner>
   </q-layout>
 </template>
 
@@ -101,6 +117,11 @@ const store = useWeightStore();
 const route = useRoute();
 const leftDrawerOpen = ref(false);
 const entryDialog = ref(false);
+const updateAvailable = ref(false);
+
+function reloadApp() {
+  window.location.reload();
+}
 
 const pageTitles = {
   "/uebersicht": "Gewichtstagebuch",
@@ -123,5 +144,11 @@ onMounted(() => {
   onUnmounted(() =>
     document.removeEventListener("visibilitychange", onVisible),
   );
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      updateAvailable.value = true;
+    });
+  }
 });
 </script>
