@@ -67,7 +67,7 @@ export const useWeightStore = defineStore("weight", {
           startSync(this.settings.couchdbUrl, (status, err) => {
             this.syncStatus = status;
             this.syncError = err;
-            if (status === 'paused') this.loadEntries();
+            if (status === "paused") this.loadEntries();
           });
         }
       } finally {
@@ -102,7 +102,7 @@ export const useWeightStore = defineStore("weight", {
         startSync(settings.couchdbUrl, (status, err) => {
           this.syncStatus = status;
           this.syncError = err;
-          if (status === 'paused') this.loadEntries();
+          if (status === "paused") this.loadEntries();
         });
       } else {
         this.syncStatus = null;

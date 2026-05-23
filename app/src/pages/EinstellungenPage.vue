@@ -63,7 +63,9 @@
             class="row items-center q-mt-sm q-gutter-xs"
           >
             <q-icon :name="syncIcon" :color="syncColor" size="18px" />
-            <span :class="`text-${syncColor} text-caption`">{{ syncLabel }}</span>
+            <span :class="`text-${syncColor} text-caption`">{{
+              syncLabel
+            }}</span>
           </div>
         </q-item-section>
       </q-item>
